@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+# mybatis配置
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.example.swim
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: jindesong
+    url: jdbc:mysql://localhost:3306/ry-vue?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    #url: jdbc:mysql://mysql:3306/ry-vue?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+  jackson:
+    time-zone: Asia/Shanghai
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+
+

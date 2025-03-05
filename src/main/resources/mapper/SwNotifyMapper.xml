@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.swim.mapper.SwNotifyMapper">
+
+    <resultMap type="com.example.swim.domain.SwNotify" id="SwNotifyResult">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="selectSwNotifyVo">
+        select id, title, content, start_time, end_time, del_flag, create_time, create_by, update_time, update_by from sw_notify
+    </sql>
+
+    <select id="selectSwNotifyList" parameterType="com.example.swim.domain.SwNotify" resultMap="SwNotifyResult">
+        <include refid="selectSwNotifyVo"/>
+        <where>
+            <if test="title != null  and title != ''">and title = #{title}</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="startTime != null ">and start_time = #{startTime}</if>
+            <if test="endTime != null ">and end_time = #{endTime}</if>
+        </where>
+    </select>
+
+    <select id="selectSwNotifyById" parameterType="long" resultMap="SwNotifyResult">
+        <include refid="selectSwNotifyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSwNotify" parameterType="com.example.swim.domain.SwNotify" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into sw_notify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSwNotify" parameterType="com.example.swim.domain.SwNotify">
+        update sw_notify
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSwNotifyById" parameterType="long">
+        delete from sw_notify where id = #{id}
+    </delete>
+
+    <delete id="deleteSwNotifyByIds" parameterType="long">
+        delete from sw_notify where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

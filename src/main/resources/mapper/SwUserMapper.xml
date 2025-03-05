@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.swim.mapper.SwUserMapper">
+
+    <resultMap type="com.example.swim.domain.SwUser" id="SwUserResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="studyNo" column="study_no"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="cardNo" column="card_no"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="username" column="username"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+    <sql id="selectSwUserVo">
+        select id, `name`, study_no, sex, age, card_no, del_flag, create_time, create_by, update_time, update_by,username,avatar from sw_user
+    </sql>
+
+    <select id="selectSwUserList" parameterType="com.example.swim.domain.SwUser" resultMap="SwUserResult">
+        <include refid="selectSwUserVo"/>
+        <where>del_flag='0'
+            <if test="name != null  and name != ''">and `name` like concat('%', #{name}, '%')</if>
+            <if test="studyNo != null  and studyNo != ''">and study_no like concat('%',#{studyNo},'%')</if>
+            <if test="sex != null  and sex != ''">and sex = #{sex}</if>
+            <if test="age != null ">and age = #{age}</if>
+            <if test="cardNo != null ">and card_no = #{cardNo}</if>
+        </where>
+        order by create_time asc
+    </select>
+
+    <select id="selectSwUserById" parameterType="long" resultMap="SwUserResult">
+        <include refid="selectSwUserVo"/>
+        where del_flag='0' and id = #{id}
+    </select>
+
+    <select id="selectSwUserByUsername" parameterType="string" resultMap="SwUserResult">
+        <include refid="selectSwUserVo"/>
+        where del_flag='0' and username = #{username}
+    </select>
+
+    <select id="getUser" resultMap="SwUserResult">
+        <include refid="selectSwUserVo"/>
+        where del_flag='0' and card_no=#{cardNo} and sex=#{sex}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from sw_user where del_flag='0'
+    </select>
+
+    <insert id="insertSwUser" parameterType="com.example.swim.domain.SwUser" useGeneratedKeys="true" keyProperty="id">
+        insert into sw_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="studyNo != null">study_no,</if>
+            <if test="sex != null">sex,</if>
+            <if test="age != null">age,</if>
+            <if test="cardNo != null">card_no,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="username != null">username,</if>
+            <if test="avatar != null">avatar,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="studyNo != null">#{studyNo},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="age != null">#{age},</if>
+            <if test="cardNo != null">#{cardNo},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="username != null">#{username},</if>
+            <if test="avatar != null">#{avatar},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSwUser" parameterType="com.example.swim.domain.SwUser">
+        update sw_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="studyNo != null">study_no = #{studyNo},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="cardNo != null">card_no = #{cardNo},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSwUserById" parameterType="long">
+        update sw_user set del_flag='2' where id = #{id}
+    </delete>
+
+    <delete id="deleteSwUserByIds" parameterType="long">
+        update sw_user set del_flag='2' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <delete id="deleteByCardNoAndSex">
+        update sw_user set del_flag='2' where card_no=#{cardNo} and sex=#{sex}
+    </delete>
+</mapper>

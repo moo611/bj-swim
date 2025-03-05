@@ -1,0 +1,71 @@
+# Ignore all the following files and directories
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Build directories
+/target/
+/build/
+/out/
+/bin/
+
+# IDE specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.vscode/
+
+# Dependency directories
+**/node_modules/
+**/bower_components/
+
+# Environment files
+.env
+*.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Maven specific files
+**/mvnw
+**/mvnw.cmd
+**/.mvn/
+
+# Gradle specific files
+.gradle/
+**/gradle/
+**/gradlew
+**/gradlew.bat
+
+# Spring Boot specific files
+**/application.properties
+**/application.yml
+**/application-*.properties
+**/application-*.yml
+
+# Other files
+*.swp
+*.swo
+*.bak
+*.orig
+*.cache
+*.diff
+*.patch
+*.tmp
+*.rej
