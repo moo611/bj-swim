@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>swim</artifactId>
+    <artifactId>bj-swim</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>swim</name>
+    <name>bj-swim</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
