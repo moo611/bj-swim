@@ -2,6 +2,7 @@ package com.example.swim.service;
 
 import java.util.List;
 import com.example.swim.domain.SwAdmin;
+import com.example.swim.domain.req.FaceAddReq;
 
 /**
  * 管理员Service接口
@@ -60,4 +61,10 @@ public interface ISwAdminService
     public int deleteSwAdminById(Long id);
 
     SwAdmin selectSwAdminByUsername(String username);
+
+    int faceAdd(FaceAddReq faceAddReq);
+
+
+    String faceCheck(FaceAddReq faceAddReq);
+
 }

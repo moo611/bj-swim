@@ -31,6 +31,16 @@ public class SwAdmin extends BaseEntity
     
     private String avatar;
 
+    public String getFaceToken() {
+        return faceToken;
+    }
+
+    public void setFaceToken(String faceToken) {
+        this.faceToken = faceToken;
+    }
+
+    String faceToken;
+
     public String getCardNo() {
         return cardNo;
     }

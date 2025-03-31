@@ -10,6 +10,7 @@ import com.example.swim.config.auth.MyUserDetailsService;
 import com.example.swim.config.auth.UserUtil;
 import com.example.swim.domain.base.AjaxResult;
 import com.example.swim.domain.base.R;
+import com.example.swim.domain.req.FaceAddReq;
 import com.example.swim.domain.req.LoginReq;
 import com.example.swim.domain.req.SwAdminListReq;
 import com.github.pagehelper.PageHelper;
@@ -155,5 +156,25 @@ public class SwAdminController extends BaseController {
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(swAdminService.deleteSwAdminByIds(ids));
+    }
+
+
+    @PostMapping(value = "/face")
+    public AjaxResult face(@RequestBody FaceAddReq faceAddReq) {
+
+        return toAjax(swAdminService.faceAdd(faceAddReq));
+
+
+    }
+
+    @PostMapping("/faceCheck")
+    public AjaxResult faceCheck(@RequestBody FaceAddReq faceAddReq) {
+
+        String userId = swAdminService.faceCheck(faceAddReq);
+
+        if (userId != null) {
+            return AjaxResult.success(Long.valueOf(userId));
+        }
+        return AjaxResult.error("未识别人脸");
     }
 }

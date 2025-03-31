@@ -21,10 +21,11 @@
         <result property="age"    column="age"    />
         <result property="role"    column="role"    />
         <result property="cardNo"    column="card_no"    />
+        <result property="faceToken"    column="face_token"    />
     </resultMap>
 
     <sql id="selectSwAdminVo">
-        select id, username, password, nickname, avatar, del_flag, create_time, create_by, update_time, update_by,sex,phone,study_no,age,role from sw_admin
+        select id, username, password, nickname, avatar, del_flag, create_time, create_by, update_time, update_by,sex,phone,study_no,age,role,face_token from sw_admin
     </sql>
 
     <select id="selectSwAdminList" parameterType="com.example.swim.domain.SwAdmin" resultMap="SwAdminResult">
@@ -68,6 +69,7 @@
             <if test="studyNo != null">study_no,</if>
             <if test="age != null">age,</if>
             <if test="role != null">role,</if>
+            <if test="faceToken != null">face_token,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="username != null">#{username},</if>
@@ -84,6 +86,7 @@
             <if test="studyNo != null">#{studyNo},</if>
             <if test="age != null">#{age},</if>
             <if test="role != null">#{role},</if>
+            <if test="faceToken != null">#{faceToken},</if>
         </trim>
     </insert>
 
@@ -104,6 +107,7 @@
             <if test="studyNo != null">study_no = #{studyNo},</if>
             <if test="age != null">age = #{age},</if>
             <if test="role != null">role = #{role},</if>
+            <if test="faceToken != null">face_token = #{faceToken},</if>
         </trim>
         where id = #{id}
     </update>
