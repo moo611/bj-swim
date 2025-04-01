@@ -1,7 +1,10 @@
 package com.example.swim.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.example.swim.domain.SwUser;
+import com.example.swim.domain.req.CountListReq;
 
 /**
  * 人员Service接口
@@ -64,4 +67,7 @@ public interface ISwUserService
     int count();
 
     SwUser getUserInfo(String cardNo, String sex);
+
+
+    List<Map<String,Integer>> getCount(CountListReq countListReq);
 }

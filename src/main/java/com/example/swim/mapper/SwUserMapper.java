@@ -1,7 +1,10 @@
 package com.example.swim.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.example.swim.domain.SwUser;
+import com.example.swim.domain.req.CountListReq;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -68,5 +71,7 @@ public interface SwUserMapper
     SwUser getUser(String cardNo, String sex);
 
     SwUser selectSwUserByUsername(String username);
+
+    List<Map<String, Integer>> getUserCount(CountListReq countListReq);
 
 }

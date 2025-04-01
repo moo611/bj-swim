@@ -1,9 +1,13 @@
 package com.example.swim.service.impl;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.example.swim.domain.SwAdmin;
+import com.example.swim.domain.req.CountListReq;
 import com.example.swim.mapper.SwAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,5 +122,12 @@ public class SwUserServiceImpl implements ISwUserService {
     public SwUser getUserInfo(String cardNo, String sex) {
 
         return swUserMapper.getUser(cardNo,sex);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getCount(CountListReq countListReq) {
+
+        return swUserMapper.getUserCount(countListReq);
+
     }
 }

@@ -121,4 +121,17 @@
     <delete id="deleteByCardNoAndSex">
         update sw_user set del_flag='2' where card_no=#{cardNo} and sex=#{sex}
     </delete>
+
+
+    <select id="getUserCount" parameterType="com.example.swim.domain.req.CountListReq" resultType="map">
+        SELECT
+            DATE(create_time) AS date,
+            COUNT(*) AS count
+        FROM sw_user
+        WHERE create_time BETWEEN #{startTime} AND #{endTime}
+        GROUP BY date
+        ORDER BY date;
+
+    </select>
+
 </mapper>

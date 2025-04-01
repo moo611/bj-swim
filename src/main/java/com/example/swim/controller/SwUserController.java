@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.example.swim.domain.SwAdmin;
 import com.example.swim.domain.base.AjaxResult;
 import com.example.swim.domain.base.R;
+import com.example.swim.domain.req.CountListReq;
 import com.example.swim.domain.req.SwUserListReq;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -120,10 +121,17 @@ public class SwUserController extends BaseController
 
     }
 
-    @GetMapping("info")
+    @GetMapping("/info")
     private AjaxResult getInfo(@RequestParam("cardNo")String cardNo,@RequestParam("sex")String sex){
 
         return AjaxResult.success("success",swUserService.getUserInfo(cardNo,sex));
+
+    }
+
+    @PostMapping("/statics")
+    private AjaxResult count(@RequestBody CountListReq countListReq){
+
+        return AjaxResult.success(swUserService.getCount(countListReq));
 
     }
 
