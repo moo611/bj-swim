@@ -134,6 +134,10 @@ public class SwAdminServiceImpl implements ISwAdminService
     @Override
     public int faceAdd(FaceAddReq faceAddReq) {
 
+        String userId = faceCheck(faceAddReq);
+        if (userId !=null){
+            return -32001;
+        }
 
         String token = getAccessToken();
 

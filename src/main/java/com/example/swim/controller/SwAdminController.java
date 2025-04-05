@@ -161,8 +161,11 @@ public class SwAdminController extends BaseController {
 
     @PostMapping(value = "/face")
     public AjaxResult face(@RequestBody FaceAddReq faceAddReq) {
-
-        return toAjax(swAdminService.faceAdd(faceAddReq));
+        int res = swAdminService.faceAdd(faceAddReq);
+        if (res == -32001) {
+            return AjaxResult.error("已经录入了");
+        }
+        return toAjax(res);
 
 
     }
